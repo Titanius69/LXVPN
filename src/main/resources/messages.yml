@@ -1,0 +1,20 @@
+#ANTI VPN-BOT-TOR-PROXY
+
+vpn-kick-messages:
+  - "&cYou have been kicked for using a VPN or proxy."
+  - "&c"
+  - "&cOr you are a Bot. Please reconnect after some sec."
+  - "&c"
+  - "&ePlease contact an admin if this is a mistake."
+  - "&c"
+alert-message: "&6Suspicious activity detected: Player %s with IP %s"
+
+
+#IPRESTRICT
+ip-restrict-kick-messages:
+  - ""
+  - "§4You cannot log in with this IP address!"
+  - "§4Please check your IP address and try again."
+  - "§4Connection lost."
+  - ""
+  

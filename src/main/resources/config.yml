@@ -1,0 +1,54 @@
+# config.yml
+
+#version of the config
+version: 07 #DO NOT TOUCH
+
+# Enable/disable features
+antivpn: true
+antibot: true
+tor: true
+
+    
+
+antivpn_tor:
+  # protection
+  
+  # recommended checklevels: 1, 2, 4 (kinda 7)
+
+  # not recommended checklevels: 3, 5
+  # 3&5 is a very slow checkmethod because it is reading  100.000+ line of IPs
+  # if you want EXTREME protection use 3,5 but dont message me for performance problems.
+  
+  #explaination:
+      #1 = free APIs, and 1 TorExitNodeList Database (if database_checks is false, it does not affect this function.)
+      #2 = Anti Tor(same here) with neblink + 2 Local Database check
+      #3 = 4 massive database check, there is performance problems (if datanse_checks is false, it does affect this function.)
+      #4 = 3 paid and free, demo APIs. And 1 Big database check
+      #5 = EXTREME Database checks
+      #6 = Proxy Database checks
+      #7 = Botnet checks, can be useless.
+  #1-5 1=low 2=normal 3=mid 4=high 5=superhigh
+  checklevels: # you might restart the entire server
+    - 1
+    - 2
+    - 4 
+    - 6
+  database_checks: false  # Set to true or false depending on whether you want to enable database checks
+  
+  #Without this there is still an anti vpn service, but less effective
+  vpn-api-api-key: "your_vpn_api_key" # https://vpnapi.io/dashboard
+  ipregistry-api-key: "your_ipregistry_api_key" # https://ipregistry.co
+
+blocked-countries:
+  - "CN"
+  - "RU"
+bypass-list: #ips or player names
+  - "127.0.0.1"
+  - "player_name"
+connection-threshold: 5
+
+#IPRestrict
+players:
+  Herobrine: #player name
+    ip: "203.0.113.45" #ip of the player
+

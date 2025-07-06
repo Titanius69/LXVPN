@@ -1,0 +1,8 @@
+name: LXVPN
+main: com.titanius.lxantivpn.bungee.Main
+version: 0.3.2-APLHA
+author: Titanius
+description: A plugin that blocks VPN and proxy connections, and manages blacklists and country restrictions.
+
+libraries:
+  - org.json:json:20240303
