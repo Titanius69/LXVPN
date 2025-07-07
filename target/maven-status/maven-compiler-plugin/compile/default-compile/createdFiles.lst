@@ -1,0 +1,15 @@
+com\titanius\lxantivpn\bungee\checkers\levels\antivpn_tor\low\lowIPChecker.class
+com\titanius\lxantivpn\bungee\checkers\antivpn_tor\IPChecker.class
+com\titanius\lxantivpn\bungee\commands\LXVPNCommands$LXVPNCommand.class
+com\titanius\lxantivpn\bungee\utils\CIDRUtils.class
+com\titanius\lxantivpn\bungee\checkers\update\UpdateChecker.class
+com\titanius\lxantivpn\bungee\utils\ColorUtil.class
+com\titanius\lxantivpn\bungee\checkers\levels\antivpn_tor\proxy\proxyIPChecker.class
+com\titanius\lxantivpn\velocity\Main.class
+com\titanius\lxantivpn\bungee\checkers\levels\antivpn_tor\ddos\botnetIPChecker.class
+com\titanius\lxantivpn\bungee\Main.class
+com\titanius\lxantivpn\bungee\checkers\levels\antivpn_tor\mid\midIPChecker.class
+com\titanius\lxantivpn\bungee\checkers\levels\antivpn_tor\high\highIPChecker.class
+com\titanius\lxantivpn\bungee\commands\LXVPNCommands.class
+com\titanius\lxantivpn\bungee\checkers\levels\antivpn_tor\normal\normalIPChecker.class
+com\titanius\lxantivpn\bungee\checkers\levels\antivpn_tor\superhigh\superhighIPChecker.class

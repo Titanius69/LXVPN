@@ -32,7 +32,7 @@ public class botnetIPChecker {
             in.close();
             return 1;
         } catch (Exception var6) {
-            plugin.logToFile("Error checking IP with Tor exit node list: " + var6.getMessage());
+            plugin.logToFile("Error checking IP with Botnet3 list: " + var6.getMessage());
             return 0;
         }
     }
@@ -56,7 +56,7 @@ public class botnetIPChecker {
             in.close();
             return 1;
         } catch (Exception var6) {
-            plugin.logToFile("Error checking IP with Tor exit node list: " + var6.getMessage());
+            plugin.logToFile("Error checking IP with Botnet2 list: " + var6.getMessage());
             return 0;
         }
     }
@@ -79,7 +79,7 @@ public class botnetIPChecker {
             in.close();
             return 1;
         } catch (Exception var6) {
-            plugin.logToFile("Error checking IP with Tor exit node list: " + var6.getMessage());
+            plugin.logToFile("Error checking IP with Botnet1 list: " + var6.getMessage());
             return 0;
         }
     }

@@ -439,7 +439,7 @@ public class Main extends Plugin implements Listener {
 
 
 
-    // TODO: konvert blacklist to mysql, or sql
+    // TODO: convert blacklist to mysql, or sql
     @EventHandler
     public void onPostLogin(PostLoginEvent event) {
         String ipAddress = event.getPlayer().getAddress().getAddress().getHostAddress();

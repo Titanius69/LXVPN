@@ -4,7 +4,7 @@
   <groupId>com.titanius.lxantivpn</groupId>
   <artifactId>LXVPN</artifactId>
   <name>LXVPN</name>
-  <version>0.3.2-APLHA</version>
+  <version>1.0-APLHA</version>
   <build>
     <defaultGoal>clean package</defaultGoal>
     <resources>
@@ -42,6 +42,10 @@
       <url>https://oss.sonatype.org/content/groups/public/</url>
     </repository>
     <repository>
+      <id>papermc</id>
+      <url>https://papermc.io/repo/repository/maven-public/</url>
+    </repository>
+    <repository>
       <id>central</id>
       <url>https://repo1.maven.org/maven2/</url>
     </repository>
@@ -53,9 +57,15 @@
       <version>1.21-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.velocitypowered</groupId>
+      <artifactId>velocity-api</artifactId>
+      <version>3.4.0-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <properties>
-    <java.version>1.8</java.version>
+    <java.version>17</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 </project>
