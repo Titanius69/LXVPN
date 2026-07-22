@@ -1,7 +1,8 @@
 {
   "id": "lxvpn",
   "name": "LXVPN",
-  "version": "1.0-APLHA",
-  "main": "com.titanius.lxantivpn.velocity.Main",
-  "author": "SufniX"
+  "version": "${project.version}",
+  "description": "Anti-VPN, anti-proxy and anti-Tor.",
+  "authors": ["SufniX"],
+  "main": "com.titanius.lxvpn.velocity.VelocityPlugin"
 }

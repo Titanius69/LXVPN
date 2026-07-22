@@ -1,20 +1,37 @@
-#ANTI VPN-BOT-TOR-PROXY
+# ---------------------------------------------------------------------------
+#  LXVPN messages
+#
+#  Colour codes use &. One file for both proxies.
+#
+#  A word on the kick screens: say what happened and what to do about it. A
+#  player refused with "Connection denied" assumes the server is broken and goes
+#  elsewhere; one told their VPN is the problem turns it off and comes back.
+# ---------------------------------------------------------------------------
 
-vpn-kick-messages:
-  - "&cYou have been kicked for using a VPN or proxy."
-  - "&c"
-  - "&cOr you are a Bot. Please reconnect after some sec."
-  - "&c"
-  - "&ePlease contact an admin if this is a mistake."
-  - "&c"
-alert-message: "&6Suspicious activity detected: Player %s with IP %s"
+prefix: "&8[&bLX&3VPN&8] &r"
 
-
-#IPRESTRICT
-ip-restrict-kick-messages:
-  - ""
-  - "§4You cannot log in with this IP address!"
-  - "§4Please check your IP address and try again."
-  - "§4Connection lost."
-  - ""
+vpn-blocked: |-
+  &c&lConnection refused
   
+  &7This network does not allow connections through a
+  &7VPN, proxy or Tor.
+  
+  &7Turn it off and reconnect. If you are not using one,
+  &7let us know and we will look into it.
+
+country-blocked: |-
+  &c&lConnection refused
+  
+  &7This network does not accept connections from your
+  &7region.
+
+ip-restricted: |-
+  &c&lConnection refused
+  
+  &7This account is locked to a different address.
+  &7Contact staff if that is not expected.
+
+no-permission: "&cYou do not have permission to use that."
+reload-success: "&aConfiguration reloaded."
+reload-failed: "&cReload failed. The previous configuration is still active; see the console."
+usage: "&7Usage: &f/lxvpn <check|reload|stats|blacklist|iprestrict>"

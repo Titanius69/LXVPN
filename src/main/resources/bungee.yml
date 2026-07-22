@@ -1,8 +1,5 @@
 name: LXVPN
-main: com.titanius.lxantivpn.bungee.Main
-version: 0.3.2-APLHA
+main: com.titanius.lxvpn.bungee.BungeePlugin
+version: ${project.version}
 author: SufniX
-description: A plugin that blocks VPN and proxy connections, and manages blacklists and country restrictions.
-
-libraries:
-  - org.json:json:20240303
+description: Anti-VPN, anti-proxy and anti-Tor.

@@ -1,54 +1,132 @@
-# config.yml
+# ---------------------------------------------------------------------------
+#  LXVPN 1.0
+#
+#  Anti-VPN, anti-proxy and anti-Tor for BungeeCord and Velocity.
+#  One jar, both proxies, identical behaviour.
+#
+#  Reload with /lxvpn reload. A file that does not parse leaves the previous
+#  settings running rather than dropping back to defaults - during an attack is
+#  the worst possible moment to silently start allowing everything.
+# ---------------------------------------------------------------------------
 
-#version of the config
-version: 08 #DO NOT TOUCH
+antivpn:
+  enabled: true
 
-# Enable/disable features
-antivpn: true
-antibot: true
-tor: true
-
-    
-
-antivpn_tor:
-  # protection
-  
-  # recommended checklevels: 1, 2, 4 (kinda 7)
-
-  # not recommended checklevels: 3, 5
-  # 3&5 is a very slow checkmethod because it is reading  100.000+ line of IPs
-  # if you want EXTREME protection use 3,5 but dont message me for performance problems.
-  
-  #explaination:
-      #1 = free APIs, and 1 TorExitNodeList Database (if database_checks is false, it does not affect this function.)
-      #2 = Anti Tor(same here) with neblink + 2 Local Database check
-      #3 = 4 massive database check, there is performance problems (if datanse_checks is false, it does affect this function.)
-      #4 = 3 paid and free, demo APIs. And 1 Big database check
-      #5 = EXTREME Database checks
-      #6 = Proxy Database checks
-      #7 = Botnet checks, can be useless.
-  #1-5 1=low 2=normal 3=mid 4=high 5=superhigh
-  checklevels: # you might restart the entire server
+  # Which tiers of checks to run.
+  #
+  #   1  Free APIs (proxycheck.io, freeipapi) + the Tor project's exit-node list
+  #   2  Published Tor, commercial VPN and datacenter ranges
+  #   3  Aggregated abuse lists (Ipsum 3/4/8, NordVPN ranges)
+  #   4  Commercial providers (vpnapi.io, ipregistry, ipapi.is) + one large list
+  #   5  Every remaining Ipsum tier + blocklist.de      <- needs database-checks
+  #   6  Published open-proxy lists                     <- needs database-checks
+  #   7  Botnet and compromised-host lists
+  #
+  # 1, 2 and 4 are the ones worth running on almost every network. Level 7 also
+  # catches home machines infected with malware, whose owners are real players,
+  # so it contributes one point rather than deciding a verdict on its own.
+  checklevels:
     - 1
     - 2
-    - 4 
-    - 6
-  database_checks: false  # Set to true or false depending on whether you want to enable database checks
-  
-  #Without this there is still an anti vpn service, but less effective
-  vpn-api-api-key: "your_vpn_api_key" # https://vpnapi.io/dashboard
-  ipregistry-api-key: "your_ipregistry_api_key" # https://ipregistry.co
+    - 4
 
-blocked-countries:
-  - "CN"
-  - "RU"
-bypass-list: #ips or player names
-  - "127.0.0.1"
-  - "player_name"
-connection-threshold: 5
+  # Allows levels 5 and 6. Off by default: together those lists hold well over a
+  # million addresses, which is real memory and a slow first refresh, for a small
+  # gain over levels 1-4. Worth turning on if you are being targeted specifically,
+  # not because more sounds better.
+  #
+  # Note: these are remote lists refreshed at runtime. LXVPN 1.0 ships no IP
+  # databases inside the jar at all - a list frozen at build time is stale the
+  # week after release.
+  database-checks: false
 
-#IPRestrict
-players:
-  Herobrine: #player name
-    ip: "203.0.113.45" #ip of the player
+  # Points needed to refuse a connection. No single source can reach this alone
+  # at the default, which is the point: free reputation APIs disagree constantly,
+  # and blocking on one of them saying "proxy" refuses real players every week.
+  #
+  #   2  balanced
+  #   3  cautious, fewer false positives
+  #   1  aggressive; expect to hear about it
+  min-score: 2
 
+  # How long a player may wait for a verdict before the connection is allowed
+  # through unchecked. A frozen login screen is a worse outcome than an unchecked
+  # VPN user.
+  lookup-timeout-seconds: 6
+
+  # Allow connections when a check fails outright, rather than refusing them.
+  # Leave this true. An anti-VPN plugin that fails closed takes the network
+  # offline the first time it meets an edge case.
+  fail-open: true
+
+  cache:
+    # Verdicts are remembered this long. Without this, every reconnect fires
+    # another round of lookups - slow for the player, and the fastest way to get
+    # your proxy's own address rate limited.
+    score-ttl-minutes: 10
+
+    # How often the downloaded lists are refreshed.
+    list-refresh-minutes: 30
+
+  # Optional. Each source is skipped silently when its key is missing, so the
+  # plugin works with none of these set.
+  api-keys:
+    vpnapi: ""        # https://vpnapi.io/dashboard
+    ipregistry: ""    # https://ipregistry.co
+    proxycheck: ""    # https://proxycheck.io - raises the free daily limit
+
+  # Datacenter detection via a local GeoLite2-ASN database, downloaded once on
+  # first start. No key, no rate limit, no request while a player waits.
+  #
+  # This is the strongest single signal here. Commercial VPNs rent capacity from
+  # a handful of hosting companies, and no consumer product puts a residential
+  # player on Amazon, OVH or Hetzner. It adds points rather than blocking, because
+  # a few legitimate players do sit behind carrier networks that look like hosting.
+  asn:
+    enabled: true
+    bonus-score: 3
+
+# Country filtering, also from a local database rather than a per-connection API.
+#
+#   blacklist  refuse the countries listed below
+#   whitelist  refuse everything except them
+#
+# Whitelist is far stronger for a single-region network and far more damaging if
+# the list is wrong. Neither is on by default.
+geo:
+  enabled: false
+  mode: "blacklist"
+  countries:
+    - "CN"
+    - "RU"
+
+# Names, addresses and CIDR ranges that skip every check. Local and private
+# addresses are always skipped and do not need listing.
+bypass:
+  - "203.0.113.0/24"
+
+# Binds accounts to permitted addresses, managed with /lxvpn iprestrict.
+# Aimed at staff accounts: anti-VPN protects the server from strangers, this
+# protects the accounts that can ban people. Ranges are accepted, because most
+# home connections do not have a static address.
+ip-restrict:
+  enabled: false
+
+webhook:
+  enabled: false
+  url: ""
+  # One notification per interval. During a flood the useful information is that
+  # you are being hit, not each of eleven thousand addresses - and Discord would
+  # rate limit the plugin long before it finished trying.
+  cooldown-seconds: 60
+
+logging:
+  # Per-connection verdict trace on the console. Enormous on a busy proxy.
+  debug: false
+  # The same trace always goes to plugins/LXVPN/logs/lxvpn.log when this is on.
+  file: true
+
+update-checker:
+  enabled: true
+  # Your SpigotMC resource id. 0 turns the check off entirely.
+  resource-id: 0
