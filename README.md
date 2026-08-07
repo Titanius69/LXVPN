@@ -1,5 +1,7 @@
 # LXVPN
 
+NOTE: 1.0-BETA refactor wasn't made by me, it was made by Claude Opus 5.0, but before that it was made by me, i was just too lazy to refactor.
+
 **Anti-VPN, anti-proxy and anti-Tor for BungeeCord and Velocity.** One jar, both
 proxies, identical behaviour.
 
